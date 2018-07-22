@@ -26,7 +26,7 @@ export default class Counter extends Component {
     render() {
         return (
             <div>
-                <input default='1' ref={this.inputText} />
+                <input defaultValue='1' ref={this.inputText} />
                 <button onClick={this.add}>+</button>
                 <button onClick={this.subtract}>-</button>
                 <button onClick={this.multiply}>*</button>
