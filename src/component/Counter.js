@@ -3,34 +3,24 @@ import React, { Component } from 'react';
 export default class Counter extends Component {
     constructor(props){
         super(props)
-        this.state = {  number: 0}
         this.inputText = React.createRef();
     }
-
-    add  = ()=>{
-        this.setState(prevState=>({
-            number: prevState.number+1
-        }))
-    }
-    subtract  = ()=>{
-        this.setState(prevState=>({
-            number: prevState.number-1
-        }))
-    }
-    multiply  = ()=>{
-        this.setState(prevState=>({
-            number: prevState.number*this.inputText.current.value
-        }))
+    multiply  = (index)=>{
+        const multiplier = this.inputText.current.value;
+        if(!isNaN(multiplier))
+            this.props.onMul(index, multiplier);
     }
 
     render() {
+        const {count, onAdd, onSub, index} = this.props;
+        // console.log("counter----"+index)
         return (
             <div>
-                <input defaultValue='1' ref={this.inputText} />
-                <button onClick={this.add}>+</button>
-                <button onClick={this.subtract}>-</button>
-                <button onClick={this.multiply}>*</button>
-                {this.state.number}
+                <input type='text' defaultValue='1' ref={this.inputText} />
+                <button onClick={()=>onAdd(index)}>+</button>
+                <button onClick={()=>onSub(index)}>-</button>
+                <button onClick={()=>this.multiply(index)}>*</button>
+                {count}
             </div>
         );
     }
